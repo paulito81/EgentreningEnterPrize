@@ -6,6 +6,9 @@ import model.Type;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 /**
  * Created by Paul on 15.10.2015.
  */
@@ -16,6 +19,9 @@ public class Main {
     private H2DAO h2DAO;
     // @Inject
     UserDAO userDao;
+
+    private EntityManagerFactory factory;
+    private EntityManager entityManager;
 
     public static void main(String[] args) {
 

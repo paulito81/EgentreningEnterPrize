@@ -3,20 +3,24 @@ package model;
 import com.sun.istack.internal.NotNull;
 import infrastructure.H2DAO;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by Paul on 15.10.2015.
  */
+@Entity
 @H2DAO
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @NotNull
-    //Pattern regexp
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
     private String email;
     @NotNull
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
     private String password;
     @NotNull
     @Enumerated(EnumType.STRING)
