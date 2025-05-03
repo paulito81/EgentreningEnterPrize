@@ -42,10 +42,10 @@ public class ArrayUserDAOTest {
     public void testGetListOfAllUsers() throws Exception {
 
         System.out.println("\n1) Test skriv ut alle brukere: ");
-        arrayUserDAO.createUser(new User(2, "per@yahoo.no", "passord123", Type.TEACHER));
-        arrayUserDAO.createUser(new User(3, "kai@yahoo.no", "passord344", Type.STUDENT));
-        arrayUserDAO.createUser(new User(4, "dia@yahoo.no", "passord555", Type.TEACHER));
-        arrayUserDAO.createUser(new User(5, "pia@yahoo.no", "passord636", Type.STUDENT));
+        arrayUserDAO.createUser(new User("per@yahoo.no", "passord123", Type.TEACHER));
+        arrayUserDAO.createUser(new User("kai@yahoo.no", "passord344", Type.STUDENT));
+        arrayUserDAO.createUser(new User("dia@yahoo.no", "passord555", Type.TEACHER));
+        arrayUserDAO.createUser(new User("pia@yahoo.no", "passord636", Type.STUDENT));
 
         int isNotNull = arrayUserDAO.getListOfAllUsers().size();
 
@@ -64,7 +64,7 @@ public class ArrayUserDAOTest {
     @Test
     public void testCreateUser() throws Exception {
         System.out.println("3) Test opprettet bruker: ");
-        boolean isCreated = arrayUserDAO.createUser(new User(2, "Fra@yahoo.no", "passord123", Type.TEACHER));
+        boolean isCreated = arrayUserDAO.createUser(new User("Fra@yahoo.no", "passord123", Type.TEACHER));
 
         Assert.assertTrue(isCreated);
 
@@ -79,9 +79,9 @@ public class ArrayUserDAOTest {
     public void testUpdateUser() throws Exception {
 
         System.out.println("4) Teste oppdater/endre bruker: ");
-        User user = new User(2, "per@yahoo.no", "passord123", Type.TEACHER);
+        User user = new User( "per@yahoo.no", "passord123", Type.TEACHER);
         arrayUserDAO.createUser(user);
-        User user2 = new User(2, "ole@yahoo.no", "parrso", Type.STUDENT);
+        User user2 = new User( "ole@yahoo.no", "parrso", Type.STUDENT);
         arrayUserDAO.updateUser(user2);
         Assert.assertNotSame(user,user2 );
 
@@ -92,7 +92,7 @@ public class ArrayUserDAOTest {
      */
     @Test
     public void testGetUserById() throws Exception {
-        arrayUserDAO.createUser(new User(7, "leo@yahoo.no", "passord1234", Type.TEACHER));
+        arrayUserDAO.createUser(new User( "leo@yahoo.no", "passord1234", Type.TEACHER));
 
         Display display = new Display();
         Optional<User> user;

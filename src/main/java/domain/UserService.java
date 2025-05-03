@@ -25,17 +25,17 @@ public class UserService {
     Display display = new Display();
 
 
-    UserService() {
+    public UserService() {
         //  h2UserDAO = new H2UserDAO();
         arrayUserDAO = new ArrayUserDAO();
         display.createHeader();
     }
 
     // ARRAYLIST
-    public void createUser(int id, String email, String password, Type workType) {
-        if (id != 0 || email != null || password != null || workType != null) {
+    public void createUser( String email, String password, Type workType) {
+        if ( email != null || password != null || workType != null) {
 
-            User user = new User(id, email, password, workType);
+            User user = new User(email, password, workType);
             display.createUser(user);
             arrayUserDAO.createUser(user);
         }else
@@ -75,10 +75,10 @@ public class UserService {
 
 
     // H2DATABASE
-    public boolean createUserH2(int id, String email, String password, Type workType) {
+    public boolean createUserH2( String email, String password, Type workType) {
 
-        if (id != 0 || email != null || password != null || workType != null) {
-            User user = new User(id, email, password, workType);
+        if ( email != null || password != null || workType != null) {
+            User user = new User( email, password, workType);
             H2UserDAO h2UserDAO = new H2UserDAO();
             display.createUser(user);
             h2UserDAO.createUser(user);

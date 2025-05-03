@@ -3,87 +3,73 @@ package infrastructureTest;
 import infrastructure.H2UserDAO;
 import model.Type;
 import model.User;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Paul on 15.10.2015.
- */
 public class H2UserDAOIT {
-    private H2UserDAO userDAO ;
 
+    private H2UserDAO userDAO;
 
     @Before
-    public void setUp(){
-
+    public void setUp() {
         userDAO = new H2UserDAO();
-
     }
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         userDAO.closeConnectionToH2();
     }
 
     @Test
-    public void createANewUser(){
-        boolean created = userDAO.createUser(new User(2,"ole@yahoo.no", "passord", Type.STUDENT));
-        Optional<User> user = userDAO.getUserById(50);
-        System.out.println("1) Test opprettelse av ´ny bruker: \tID:" + user.get().getId() + "\tEpost:" + user.get().getEmail() +"\tPassord:"+ user.get().getPassword() + "\t\tJobb:" + user.get().getWorkType());
+    public void createANewUser() {
+        User user = new User("ole@yahoo.no", "Passord123!", Type.STUDENT);
+        boolean created = userDAO.createUser(user);
         Assert.assertTrue(created);
+
+        List<User> users = userDAO.getAllUsers();
+        Optional<User> savedUser = users.stream().filter(u -> u.getEmail().equals("ole@yahoo.no")).findFirst();
+        Assert.assertTrue(savedUser.isPresent());
+        savedUser.ifPresent(System.out::println);
     }
 
     @Test
-    public void updateAUser(){
+    public void updateAUser() {
+        Optional<User> userOpt = userDAO.getUserById(1);
+        userOpt.ifPresent(System.out::println);
+
+        boolean updated = userDAO.updateUser(new User( 1, "fredrik@yahoo.no", "Gutt1234!", Type.STUDENT));
+        Assert.assertTrue(updated);
+    }
+
+    @Test
+    public void getAUserById() {
         Optional<User> user = userDAO.getUserById(1);
-        if(user.isPresent()) {
-            System.out.println("2) Test oppdatering av ´bruker X: \tID:" + user.get().getId() + "\tEpost:" + user.get().getEmail() + "\tPassord:"+ user.get().getPassword()+ "\tJobb:" + user.get().getWorkType());
-        }
-
-        boolean isUpdated = userDAO.updateUser(new User(1, "fredrik@yahoo.no", "gutt1234", Type.STUDENT));
-        Assert.assertTrue(isUpdated);
+        Assert.assertTrue(user.isPresent());
+        user.ifPresent(System.out::println);
     }
 
     @Test
-    public void getAUserById(){
-        Optional<User> user = userDAO.getUserById(1);
-        if(user.isPresent() ){
-            System.out.println("3) Test hente bruker med ´ID X: \tID:" + user.get().getId()  + "\tEpost:" + user.get().getEmail()+ "\tPassord:"+ user.get().getPassword()+ "\tJobb:" + user.get().getWorkType());
+    public void getAllUsers() {
+        userDAO.createUser(new User("ole@yahoo.no", "passord0!", Type.STUDENT));
+        userDAO.createUser(new User("per@yahoo.no", "passord2!", Type.TEACHER));
+        userDAO.createUser(new User("knus@yahoo.no", "passord3!", Type.TEACHER));
+        userDAO.createUser(new User("rut@yahoo.no", "passord4!", Type.STUDENT));
 
-        }
-        user = userDAO.getUserById(1);
-        Assert.assertNotNull(user);
+        List<User> users = userDAO.getAllUsers();
+        users.forEach(System.out::println);
 
-    }
-    @Test
-    public void getAllUsers(){
-        List<User> listOfUsers = new ArrayList<>();
-        userDAO.createUser(new User(2,"ole@yahoo.no", "passord0", Type.STUDENT));
-        userDAO.createUser(new User(3,"per@yahoo.no", "passord2", Type.TEACHER));
-        userDAO.createUser(new User(4,"knus@yahoo.no", "passord3", Type.TEACHER));
-        userDAO.createUser(new User(5,"rut@yahoo.no", "passord4", Type.STUDENT));
-
-        for (User user : userDAO.getAllUsers()) {
-            listOfUsers.add(user);
-            System.out.println("4) Teste hente alle brukere´ \t\tID:" + user.getId()  + "\tEpost:" + user.getEmail()+ "\tPassord:"+ user.getPassword()+ "\tJobb:" + user.getWorkType());
-        }
-        Assert.assertTrue(!userDAO.getAllUsers().isEmpty());
-
-
+        Assert.assertFalse(users.isEmpty());
+        Assert.assertEquals(5, users.size());
     }
 
     @Test
     public void deleteAUser() {
-        Optional<User> user = userDAO.getUserById(1);
-        user = userDAO.getUserById(1);
-        System.out.println("5) Sletter bruker med id: \t\t\tID:" + user.get().getId()  + "\tEpost:" + user.get().getEmail()+ "\tPassord:"+ user.get().getPassword()+ "\tJobb:" + user.get().getWorkType());
-        boolean isDeleted = userDAO.deleteUser(1);
-        Assert.assertTrue(isDeleted);
-    }
+        Optional<User> userOpt = userDAO.getUserById(1);
+        userOpt.ifPresent(System.out::println);
 
+        boolean deleted = userDAO.deleteUser(1);
+        Assert.assertTrue(deleted);
+    }
 }

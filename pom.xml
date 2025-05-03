@@ -8,43 +8,60 @@
     <artifactId>EgentreningEnterPrize</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <hibernate-entitymanager.version>5.6.15.Final</hibernate-entitymanager.version>
+        <h2.version>2.3.232</h2.version>
+        <weld-se.version>2.4.8.Final</weld-se.version>
+        <slf4j-simple.version>2.0.17</slf4j-simple.version>
+        <junit.version>4.13.2</junit.version>
+        <weld-se-core.version>6.0.2.Final</weld-se-core.version>
+        <javax.validation.version>2.0.1.Final</javax.validation.version>
+        <maven-compiler-plugin>3.14.0</maven-compiler-plugin>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.0.1.Final</version>
+            <version>${hibernate-entitymanager.version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.189</version>
+            <version>${h2.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se</artifactId>
-            <version>2.3.0.Final</version>
+            <version>${weld-se.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.12</version>
+            <version>${slf4j-simple.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-core</artifactId>
-            <version>3.0.0.Alpha13</version>
+            <version>${weld-se-core.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <version>${javax.validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.14.2</version>
+            <scope>test</scope>
         </dependency>
 
 
@@ -54,10 +71,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>${maven-compiler-plugin}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
         </plugins>

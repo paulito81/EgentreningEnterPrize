@@ -60,7 +60,7 @@ public class ArrayUserDAO implements UserDAO{
             getListOfAllUsers().contains(user);
             // List<User> user2 = listOfAllUsers.stream().filter((l) -> l.getId() == id).collect(Collectors.toList());
 
-            return Optional.of(new User(user.getId(), user.getEmail(), user.getPassword(), user.getWorkType() ));
+            return Optional.of(new User(user.getEmail(), user.getPassword(), user.getWorkType() ));
         }
         display.getUserById(Optional.empty());
         return Optional.empty();

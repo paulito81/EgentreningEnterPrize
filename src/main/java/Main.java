@@ -35,11 +35,11 @@ public class Main {
 
     public static void createH2(UserService userService) {
         System.out.println("-----H2 PRINTOUT:------");
-        userService.createUserH2(20, "ola@yahoo.no", "passord8", Type.STUDENT);
-        userService.createUserH2(30, "Gun@yahoo.no", "passord2", Type.TEACHER);
-        userService.createUserH2(40, "kei@yahoo.no", "passord3", Type.STUDENT);
-        userService.createUserH2(50, "lars@yahoo.no", "passord4", Type.TEACHER);
-        userService.createUserH2(60, "silje@yahoo.no", "passord5", Type.STUDENT);
+        userService.createUserH2("ola@yahoo.no", "passord8", Type.STUDENT);
+        userService.createUserH2( "Gun@yahoo.no", "passord2", Type.TEACHER);
+        userService.createUserH2( "kei@yahoo.no", "passord3", Type.STUDENT);
+        userService.createUserH2("lars@yahoo.no", "passord4", Type.TEACHER);
+        userService.createUserH2("silje@yahoo.no", "passord5", Type.STUDENT);
         // userService.dropTable("USER");
 
         userService.getAllUsersH2();
@@ -51,11 +51,11 @@ public class Main {
 
     public static void createArrayList(UserService userService) {
         System.out.println("<<<<<<ARRAYLIST PRINTOUT:>>>>>>");
-        userService.createUser(1, "ola@yahoo.no", "passord8", Type.STUDENT);
-        userService.createUser(2, "Gun@yahoo.no", "passord2", Type.TEACHER);
-        userService.createUser(3, "kei@yahoo.no", "passord3", Type.STUDENT);
-        userService.createUser(4, "lars@yahoo.no", "passord4", Type.TEACHER);
-        userService.createUser(5, "silje@yahoo.no", "passord5", Type.STUDENT);
+        userService.createUser( "ola@yahoo.no", "passord8", Type.STUDENT);
+        userService.createUser("Gun@yahoo.no", "passord2", Type.TEACHER);
+        userService.createUser( "kei@yahoo.no", "passord3", Type.STUDENT);
+        userService.createUser( "lars@yahoo.no", "passord4", Type.TEACHER);
+        userService.createUser( "silje@yahoo.no", "passord5", Type.STUDENT);
         //  userService.updateUser(new User(2, "erik@yahoo.no", "passord4", Type.STUDENT));
         // userService.getAllUsers();
     }

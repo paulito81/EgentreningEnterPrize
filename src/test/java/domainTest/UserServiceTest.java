@@ -1,15 +1,29 @@
 package domainTest;
 
+import domain.UserService;
+import infrastructure.ArrayUserDAO;
 import model.Type;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by Paul on 15.10.2015.
  */
 public class UserServiceTest {
+
+
+    @Mock
+    private UserService userService;
+
+    @Mock
+    private ArrayUserDAO arrayUserDAO;
+
     // user tests
     User user1;
     User user2;
@@ -18,11 +32,13 @@ public class UserServiceTest {
 
     @Before
     public void setUp(){
+
+        userService = new UserService();
         // id, mail, password, worktype
-        user1 = new User(300,"peterpan@yahoo.no","123456789", Type.STUDENT );
-        user2 = new User(301,"wendy@yahoo.no","abcdefgh", Type.STUDENT );
-        user3 = new User(302,"james@yahoo.no","ijklmnopqr", Type.TEACHER );
-        user4 = new User(303,"olav@yahoo.no","awsdjiklm", Type.TEACHER );
+        user1 = new User("peterpan@yahoo.no","123456789", Type.STUDENT );
+        user2 = new User("wendy@yahoo.no","abcdefgh", Type.STUDENT );
+        user3 = new User("james@yahoo.no","ijklmnopqr", Type.TEACHER );
+        user4 = new User("olav@yahoo.no","awsdjiklm", Type.TEACHER );
 
     }
 
@@ -33,13 +49,11 @@ public class UserServiceTest {
         user2 = null;
         user3 = null;
         user4 = null;
-
     }
 
 
     @Test
-    public void createUser() throws Exception {
-        //TODO return a user fields updated
+    public void testCreateNewUser() {
     }
     @Test
     public void updateUser(){
